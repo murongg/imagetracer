@@ -11,16 +11,15 @@ export const getImageSrc = (file: File) => {
 export const convertImage = ({ file, options }: { file: File; options: MaybeImageTracerOptions }) => {
   return new Promise((resolve) => {
     const objectURL = window.URL.createObjectURL(file)
-    imageTracer.imageToSVG(
+    const data = imageTracer.imageToSVG(
       objectURL,
-      (data: string) => {
-        resolve(data)
-      },
+
       {
         ...options,
         viewbox: true,
       },
     )
+    resolve(data)
   })
 }
 
