@@ -39,7 +39,7 @@ There are more functions for advanced users, read the source if you are interest
 ## Options
 You can use an option preset name (string) or an [options object](https://github.com/murongg/imagetracer/blob/master/options.md) to control the tracing and rendering process.
 
-![Option presets gallery](assets/option_presets_small.png)
+![Option presets gallery](https://github.com/murongg/imagetracer/blob/main/assets/option_presets_small.jpg?raw=true)
 
 These strings can be passed instead of the options object:
 ```'default'```
