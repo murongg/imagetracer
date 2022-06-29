@@ -87,7 +87,7 @@ export enum Colorsampling {
   DETERMINISTIC_SAMPLING, // 2: deterministic sampling
 }
 
-export type ImageTracerOptionsParamers = MaybeImageTracerOptions | ImageTracerOptionsPresetKeys
+export type ImageTracerOptionsParamers = MaybeImageTracerOptions | ImageTracerOptionsPresetKeys | undefined
 
 export interface Tracedata {
   layers: any[]

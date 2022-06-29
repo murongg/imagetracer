@@ -14,7 +14,7 @@ export class ImageTracer {
    * @param options
    */
   checkOptions(options: ImageTracerOptionsParamers): MaybeImageTracerOptions {
-    let result: MaybeImageTracerOptions = {}
+    let result: MaybeImageTracerOptions = { ...this.optionpresets.default }
     // Option preset
     if (typeof options === 'string') {
       const presetName = options
@@ -24,7 +24,7 @@ export class ImageTracer {
 
     if (typeof options === 'object') {
       // Defaults
-      result = { ...this.optionpresets.default }
+      result = { ...options }
     }
     // options.pal is not defined here, the custom palette should be added externally: options.pal = [ { 'r':0, 'g':0, 'b':0, 'a':255 }, {...}, ... ];
     // options.layercontainerid is not defined here, can be added externally: options.layercontainerid = 'mydiv'; ... <div id="mydiv"></div>
@@ -38,18 +38,11 @@ export class ImageTracer {
    * @param callback
    * @param options
    */
-  imageToSVG(url: string, callback: (data: string) => void, options: ImageTracerOptionsParamers) {
+  async imageToSVG(url: string, options: ImageTracerOptionsParamers) {
     options = this.checkOptions(options)
     // loading image, tracing and callback
-    this.loadImage(
-      url,
-      (canvas: HTMLCanvasElement) => {
-        callback(
-          this.imageDataToSVG(this.getImgdata(canvas), options),
-        )
-      },
-      options,
-    )
+    const canvas = await this.loadImage(url, options)
+    return this.imageDataToSVG(this.getImgdata(canvas), options)
   }
 
   getImgdata(canvas: HTMLCanvasElement) {
@@ -63,19 +56,21 @@ export class ImageTracer {
    * @param callback
    * @param options
    */
-  loadImage(url: string, callback: (data: HTMLCanvasElement) => void, options: MaybeImageTracerOptions) {
-    const img = new Image()
-    if (options && options.corsenabled)
-      img.crossOrigin = 'Anonymous'
-    img.onload = function () {
-      const canvas = document.createElement('canvas')
-      canvas.width = img.width
-      canvas.height = img.height
-      const context = canvas.getContext('2d')
-      context?.drawImage(img, 0, 0)
-      callback(canvas)
-    }
-    img.src = url
+  loadImage(url: string, options: MaybeImageTracerOptions): Promise<HTMLCanvasElement> {
+    return new Promise((resolve) => {
+      const img = new Image()
+      if (options && options.corsenabled)
+        img.crossOrigin = 'Anonymous'
+      img.src = url
+      img.onload = function () {
+        const canvas = document.createElement('canvas')
+        canvas.width = img.width
+        canvas.height = img.height
+        const context = canvas.getContext('2d')
+        context?.drawImage(img, 0, 0)
+        resolve(canvas)
+      }
+    })
   }
 
   /**
@@ -98,18 +93,11 @@ export class ImageTracer {
    * @param callback
    * @param options
    */
-  imageToTracedata(url: string, callback: (data: Tracedata) => void, options: ImageTracerOptionsParamers) {
+  async imageToTracedata(url: string, options: ImageTracerOptionsParamers) {
     options = this.checkOptions(options)
     // loading image, tracing and callback
-    this.loadImage(
-      url,
-      (canvas: HTMLCanvasElement) => {
-        callback(
-          this.imageDataToTracedata(this.getImgdata(canvas), options),
-        )
-      },
-      options,
-    )
+    const canvas = await this.loadImage(url, options)
+    return this.imageDataToTracedata(this.getImgdata(canvas), options)
   }
 
   /**
