@@ -1,4 +1,4 @@
-import { GKS } from '../contants'
+import { GKS } from '../constants'
 
 /**
  * Selective Gaussian blur for preprocessing

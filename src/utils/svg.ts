@@ -1,5 +1,5 @@
 /* eslint-disable no-prototype-builtins */
-import { VERSION_NUMBER } from '../contants'
+import { VERSION_NUMBER } from '../constants'
 import { roundToDec } from './utils'
 
 /**

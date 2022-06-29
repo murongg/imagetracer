@@ -1,4 +1,4 @@
-export * from './contants'
+export * from './constants'
 export * from './image-tracer'
 export * from './presets'
 export * from './types'

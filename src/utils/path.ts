@@ -1,4 +1,4 @@
-import { PATHSCAN_COMBINED_LOOKUP } from '../contants'
+import { PATHSCAN_COMBINED_LOOKUP } from '../constants'
 import { boundingBoxIncludes, fitSeq, pointInPoly } from './svg'
 
 export function testRightAngle(path: any, idx1: any, idx2: any, idx3: any, idx4: any, idx5: any) {

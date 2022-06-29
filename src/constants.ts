@@ -1,3 +1,4 @@
+// eslint-disable-next-line @typescript-eslint/no-var-requires
 export const VERSION_NUMBER = require('../package.json').version
 
 export const PATHSCAN_COMBINED_LOOKUP = [
