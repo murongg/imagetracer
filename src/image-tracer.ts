@@ -43,7 +43,7 @@ export class ImageTracer {
     // loading image, tracing and callback
     this.loadImage(
       url,
-      (canvas: any) => {
+      (canvas: HTMLCanvasElement) => {
         callback(
           this.imageDataToSVG(this.getImgdata(canvas), options),
         )

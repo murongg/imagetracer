@@ -40,6 +40,8 @@
   "scripts": {
     "build": "rimraf dist && unbuild",
     "dev": "unbuild --stub",
+    "demo:dev": "pnpm run -C example dev",
+    "demo:build": "pnpm run -C example build",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "prepare": "husky install",
