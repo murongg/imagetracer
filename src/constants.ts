@@ -1,4 +1,4 @@
-export const VERSION_NUMBER = '1.2.6'
+export const VERSION_NUMBER = require('../package.json').version
 
 export const PATHSCAN_COMBINED_LOOKUP = [
   [[-1, -1, -1, -1], [-1, -1, -1, -1], [-1, -1, -1, -1], [-1, -1, -1, -1]], // arr[py][px]===0 is invalid

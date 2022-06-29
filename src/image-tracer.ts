@@ -1,4 +1,4 @@
-import { SPECPALETTE, VERSION_NUMBER } from './contants'
+import { SPECPALETTE, VERSION_NUMBER } from './constants'
 import { OPTION_PRESETS } from './presets'
 import type { ImageTracerOptionsParamers, MaybeImageTracerOptions, Tracedata } from './types'
 import { batchInterNodes, batchPathScan, batchTraceLayers, batchTracePaths, colorQuantization, drawLayers, getSvgString, interNodes, layering, layeringStep, pathScan } from './utils'
