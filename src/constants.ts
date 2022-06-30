@@ -1,5 +1,5 @@
 // eslint-disable-next-line @typescript-eslint/no-var-requires
-export const VERSION_NUMBER = '0.1.1'
+export const VERSION_NUMBER = '0.2.1'
 
 export const PATHSCAN_COMBINED_LOOKUP = [
   [[-1, -1, -1, -1], [-1, -1, -1, -1], [-1, -1, -1, -1], [-1, -1, -1, -1]], // arr[py][px]===0 is invalid
