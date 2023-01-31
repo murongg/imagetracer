@@ -14,9 +14,9 @@ export class ImageTracer {
    * @param options
    */
   checkOptions(options: ImageTracerOptionsParamers): MaybeImageTracerOptions {
-    if (options === undefined) {
+    if (options === undefined)
       return { ...this.optionpresets.default }
-    }
+
     // Option preset
     if (typeof options === 'string') {
       const presetName = options
