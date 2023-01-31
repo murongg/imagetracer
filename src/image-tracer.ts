@@ -14,21 +14,21 @@ export class ImageTracer {
    * @param options
    */
   checkOptions(options: ImageTracerOptionsParamers): MaybeImageTracerOptions {
-    let result: MaybeImageTracerOptions = { ...this.optionpresets.default }
+    if (options === undefined) {
+      return { ...this.optionpresets.default }
+    }
     // Option preset
     if (typeof options === 'string') {
       const presetName = options
       const preset = this.optionpresets[presetName]
-      result = preset || {}
+      return { ...this.optionpresets.default, ...(preset || {}) }
     }
 
     if (typeof options === 'object') {
       // Defaults
-      result = { ...options }
+      return { ...this.optionpresets.default, ...options }
     }
-    // options.pal is not defined here, the custom palette should be added externally: options.pal = [ { 'r':0, 'g':0, 'b':0, 'a':255 }, {...}, ... ];
-    // options.layercontainerid is not defined here, can be added externally: options.layercontainerid = 'mydiv'; ... <div id="mydiv"></div>
-    return result
+    throw new Error(`Unknown Option Type: ${typeof options}`)
   }
 
   /**
@@ -38,7 +38,7 @@ export class ImageTracer {
    * @param callback
    * @param options
    */
-  async imageToSVG(url: string, options: ImageTracerOptionsParamers) {
+  async imageToSVG(url: string, options?: ImageTracerOptionsParamers) {
     options = this.checkOptions(options)
     // loading image, tracing and callback
     const canvas = await this.loadImage(url, options)
@@ -56,7 +56,7 @@ export class ImageTracer {
    * @param callback
    * @param options
    */
-  loadImage(url: string, options: MaybeImageTracerOptions): Promise<HTMLCanvasElement> {
+  loadImage(url: string, options?: MaybeImageTracerOptions): Promise<HTMLCanvasElement> {
     return new Promise((resolve) => {
       const img = new Image()
       if (options && options.corsenabled)
@@ -78,7 +78,7 @@ export class ImageTracer {
    * @param imgd
    * @param options
    */
-  imageDataToSVG(imgd: ImageData, options: ImageTracerOptionsParamers) {
+  imageDataToSVG(imgd: ImageData, options?: ImageTracerOptionsParamers) {
     options = this.checkOptions(options)
     // tracing imagedata
     const td = this.imageDataToTracedata(imgd, options)
@@ -93,7 +93,7 @@ export class ImageTracer {
    * @param callback
    * @param options
    */
-  async imageToTracedata(url: string, options: ImageTracerOptionsParamers) {
+  async imageToTracedata(url: string, options?: ImageTracerOptionsParamers) {
     options = this.checkOptions(options)
     // loading image, tracing and callback
     const canvas = await this.loadImage(url, options)
@@ -105,7 +105,7 @@ export class ImageTracer {
    * @param imgd
    * @param options
    */
-  imageDataToTracedata(imgd: ImageData, options: ImageTracerOptionsParamers): Tracedata {
+  imageDataToTracedata(imgd: ImageData, options?: ImageTracerOptionsParamers): Tracedata {
     options = this.checkOptions(options)
     let tracedata: Tracedata
     // 1. Color quantization

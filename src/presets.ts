@@ -32,6 +32,8 @@ export const OPTION_PRESETS: ImageTracerOptionsPresets = {
     blurradius: 0,
     blurdelta: 20,
 
+    // options.pal is not defined here, the custom palette should be added externally: options.pal = [ { 'r':0, 'g':0, 'b':0, 'a':255 }, {...}, ... ];
+    // options.layercontainerid is not defined here, can be added externally: options.layercontainerid = 'mydiv'; ... <div id="mydiv"></div>
   },
 
   posterized1: { colorsampling: 0, numberofcolors: 2 },
