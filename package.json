@@ -1,6 +1,6 @@
 {
   "name": "imagetracer",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "packageManager": "pnpm@7.1.5",
   "description": "Simple raster image tracer and vectorizer written in TypeScript.",
   "author": "MuRong <admin@imuboy.cn>",
